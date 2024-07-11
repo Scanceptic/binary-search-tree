@@ -1,5 +1,5 @@
 // Node factory function
-function Node(data, left = null, right = null) {
+function Node(data = null, left = null, right = null) {
 	try {
 		return {
 			data,
@@ -16,10 +16,53 @@ function Tree(array) {
 	try {
 		// build tree and save root node
 		const root = buildTree(array);
-		// insert a value into the tree
-		function insert(value) {
-			// follow path down the tree based on higher/lower until reaching node.right || node.left === null
-			// insert value
+		// insert a value into the tree (recursive)
+		function insert(value, node = root) {
+			//console.log("Node is:");
+			//console.log(node);
+			// is the tree empty?
+			if (node.data === null) {
+				//console.log("Tree empty");
+				node = Node(value);
+			}
+			// is current selected node greater than value?
+			if (node.data > value) {
+				// YES - go left to lower values
+				// if there is a left node
+				if (node.left !== null) {
+					//console.log("Going left...");
+					// go down the branch
+					insert(value, node.left);
+				} else {
+					//console.log("Inserting left");
+					// else insert value
+					node.left = Node(value);
+					// stop
+					return;
+				}
+			} else if (node.data < value) {
+				// NO - go right to higher values
+				// if there is a right node
+				if (node.right !== null) {
+					//console.log("Going right...");
+					// go down the branch
+					insert(value, node.right);
+				} else {
+					//console.log("Inserting right");
+					// else insert value
+					node.right = Node(value);
+					// stop
+					return;
+				}
+			} else {
+				/*
+				 *   else node === value so stop because either:
+				 *   it was an empty tree and node has been placed at root
+				 *   or a duplicate snuck in somewhere so should not be placed in the tree
+				 */
+				//console.log("Null node");
+				return;
+			}
 		}
 		// delete a value from the tree
 		function deleteItem(value) {
@@ -61,10 +104,10 @@ function Tree(array) {
 			// else all nodes balanced: return true
 			return true;
 		}
-        // rebalance an unbalanced tree
+		// rebalance an unbalanced tree
 		function rebalance() {
-            // use a traversal method to provide a new array to the buildTree func
-        }
+			// use a traversal method to provide a new array to the buildTree func
+		}
 		return {
 			root,
 			insert,
