@@ -72,20 +72,18 @@ function Tree(array) {
 			// if tree doesnt exist
 			if (node.data === null) {
 				// stop - failure (empty tree)
+				console.log("Empty tree");
 				return false;
 			}
-			// check node.left.data
-			// if it matches value
-			if (node.left.data === value) {
+			// check if node.left.data and node.right.data match value
+			else if (node.left && node.left.data === value) {
 				console.log("Match left");
 				console.log(node);
 				// get node.left.left and node.left.right
 				// attach them to node.left
 				// stop - success
 				return true;
-			}
-			// check node.right.data
-			if (node.right.data === value) {
+			} else if (node.right && node.right.data === value) {
 				console.log("Match right");
 				console.log(node);
 				// get node.right.left and node.right.right
@@ -94,34 +92,33 @@ function Tree(array) {
 				return true;
 			}
 			// if neither is true go a layer deeper according to tree logic
-			if (node.data > value) {
+			else if (node.data > value) {
 				// GREATER - go left to lower values
 				// if there is a left node
 				if (node.left !== null) {
-					//console.log("Going left...");
+					console.log("Going left...");
 					// go down the branch
 					deleteItem(value, node.left);
 				} else {
+					// else no item found return false
 					// stop - failure (no item found)
+					console.log("No item found");
 					return false;
 				}
 			} else if (node.data < value) {
 				// LESS - go right to higher values
 				// if there is a right node
 				if (node.right !== null) {
-					//console.log("Going right...");
+					console.log("Going right...");
 					// go down the branch
 					deleteItem(value, node.right);
 				} else {
+					// else no item found return false
 					// stop - failure (no item found)
+					console.log("No item found");
 					return false;
 				}
 			}
-			// delete node
-			// cleanup tree
-			// does the node have children?
-			// do their nodes have children?
-			// are there only children on the right or left?
 		}
 		// find and return node with value
 		function find(value) {}
