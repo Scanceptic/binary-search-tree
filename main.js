@@ -236,19 +236,17 @@ function Tree(array) {
 			}
 		}
 		// check if tree is balanced
-		function isBalanced() {
-			// go through every node
-			for (node in tree) {
-				// get height of left subtree
-				// get height of right subtree
-				// if height diff is more than 1
-				if (heightdiff > 1) {
-					// return false - unbalanced
-					return false;
-				}
+		function isBalanced(node = root) {
+			if (node === null) return true;
+
+			let leftSubtreeHeight = height(node.left);
+			let rightSubtreeHeight = height(node.right);
+
+			if (Math.abs(leftSubtreeHeight - rightSubtreeHeight) > 1) {
+				return false;
 			}
-			// else all nodes balanced: return true
-			return true;
+
+			return isBalanced(node.left) && isBalanced(node.right);
 		}
 		// rebalance an unbalanced tree
 		function rebalance() {
