@@ -182,11 +182,13 @@ function Tree(array) {
 			return array;
 		}
 		// traverse tree in depth-first order: in order
-		function inOrder(callback = console.log, node = root) {
+		function inOrder(callback = console.log, node = root, array = []) {
 			if (node) {
-				inOrder(callback, node.left);
+				inOrder(callback, node.left, array);
+				array.push(node.data);
 				callback(node.data);
-				inOrder(callback, node.right);
+				inOrder(callback, node.right, array);
+				return array;
 			}
 		}
 		// traverse tree in depth-first order: pre order
@@ -249,8 +251,13 @@ function Tree(array) {
 			return isBalanced(node.left) && isBalanced(node.right);
 		}
 		// rebalance an unbalanced tree
-		function rebalance() {
+		function rebalance(node = root) {
 			// use a traversal method to provide a new array to the buildTree func
+			// use inorder traversal
+			const array = inOrder();
+			console.log(array);
+			// build new tree
+			//return buildTree(array);
 		}
 		return {
 			root,
