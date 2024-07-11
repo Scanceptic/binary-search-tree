@@ -37,8 +37,8 @@ function Tree(array) {
 					//console.log("Inserting left");
 					// else insert value
 					node.left = Node(value);
-					// stop
-					return;
+					// stop - sucess
+					return true;
 				}
 			} else if (node.data < value) {
 				// NO - go right to higher values
@@ -51,8 +51,8 @@ function Tree(array) {
 					//console.log("Inserting right");
 					// else insert value
 					node.right = Node(value);
-					// stop
-					return;
+					// stop - sucess
+					return true;
 				}
 			} else {
 				/*
@@ -61,12 +61,69 @@ function Tree(array) {
 				 *   or a duplicate snuck in somewhere so should not be placed in the tree
 				 */
 				//console.log("Null node");
-				return;
+				// stop - failure (empty tree or duplicate)
+				return false;
 			}
 		}
 		// delete a value from the tree
-		function deleteItem(value) {
-			// find the node
+		function deleteItem(value, node = root) {
+			// follow the tree in the same way as for insert()
+			// start from root
+			// if tree doesnt exist
+			if (node.data === null) {
+				// stop - failure (empty tree)
+				return false;
+			}
+			// check node.left.data
+			// if it matches value
+			if (node.left.data === value) {
+				console.log("Match left");
+				// get node.left.left and node.left.right
+				// attach them to node.left
+				// stop - success
+				return true;
+			}
+			// check node.right.data
+			if (node.right.data === value) {
+				console.log("Match right");
+				// get node.right.left and node.right.right
+				// attach them to node.right
+				// stop - success
+				return true;
+			}
+			// if neither is true go a layer deeper according to tree logic
+			// is current node equal to value?
+			if (node.data === value) {
+				// SAME - remove item
+				// remove selected node
+				node.data = null;
+				// patch up tree
+				// connect node.right and node.left to parent node
+				// stop - sucess (removed item)
+				return true;
+			} else if (node.data > value) {
+				// GREATER - go left to lower values
+				// if there is a left node
+				if (node.left !== null) {
+					//console.log("Going left...");
+					// go down the branch
+					deleteItem(value, node.left);
+				} else {
+					// stop - failure (no item found)
+					return false;
+				}
+			} else if (node.data < value) {
+				// LESS - go right to higher values
+				// if there is a right node
+				if (node.right !== null) {
+					//console.log("Going right...");
+					// go down the branch
+					deleteItem(value, node.right);
+				} else {
+					// stop - failure (no item found)
+					return false;
+				}
+			}
 			// delete node
 			// cleanup tree
 			// does the node have children?
