@@ -208,19 +208,13 @@ function Tree(array) {
 			callback(node.data);
 		}
 		// return a given node's height (longest no of branches to leaf node)
-		function height(node, heightCount = 0) {
-			console.log(heightCount);
-			console.log(node);
-			if (node.left !== null || node.right !== null) {
-				heightCount++;
-				if (node.left !== null) {
-					return height(node.left, heightCount);
-				} else if (node.right !== null) {
-					return height(node.right, heightCount);
-				}
-			} else {
-				return heightCount;
-			}
+		function height(node) {
+			if (node === null) return -1;
+
+			let leftHeight = height(node.left);
+			let rightHeight = height(node.right);
+
+			return Math.max(leftHeight, rightHeight) + 1;
 		}
 		// return a given node's depth (no of branches to root node)
 		function depth(node) {}
