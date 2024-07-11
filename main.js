@@ -26,11 +26,59 @@ function Tree(array) {
 			// find the node
 			// delete node
 			// cleanup tree
-			    // does the node have children?
-			    // do their nodes have children?
-			    // are there only children on the right or left?
+			// does the node have children?
+			// do their nodes have children?
+			// are there only children on the right or left?
 		}
-		return { root };
+		// find and return node with value
+		function find(value) {}
+		// traverse tree breadth-first and provide each node as an argument to the callback
+		// use iteration or recursion | return array of vals if no callback param
+		// use array acting as queue to keep track of all child nodes yet to traverse and to add new nodes to list
+		function levelOrder(callback) {}
+		// traverse tree in depth-first order: in order
+		function inOrder(callback) {}
+		// traverse tree in depth-first order: pre order
+		function preOrder(callback) {}
+		// traverse tree in depth-first order: post order
+		function postOrder(callback) {}
+		// return a given node's height (longest no of branches to leaf node)
+		function height(node) {}
+		// return a given node's depth (no of branches to root node)
+		function depth(node) {}
+		// check if tree is balanced
+		function isBalanced() {
+			// go through every node
+			for (node in tree) {
+				// get height of left subtree
+				// get height of right subtree
+				// if height diff is more than 1
+				if (heightdiff > 1) {
+					// return false - unbalanced
+					return false;
+				}
+			}
+			// else all nodes balanced: return true
+			return true;
+		}
+        // rebalance an unbalanced tree
+		function rebalance() {
+            // use a traversal method to provide a new array to the buildTree func
+        }
+		return {
+			root,
+			insert,
+			deleteItem,
+			find,
+			levelOrder,
+			inOrder,
+			preOrder,
+			postOrder,
+			height,
+			depth,
+			isBalanced,
+			rebalance,
+		};
 	} catch (error) {
 		console.log(error);
 	}
