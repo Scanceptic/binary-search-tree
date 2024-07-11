@@ -1,5 +1,5 @@
 // Node factory function
-function Node(value = null, leftChild = null, rightChild = null) {
+function Node(value = null, left = null, right = null) {
 	try {
 		return {
 			value,
@@ -55,6 +55,7 @@ function buildTree(array) {
 		// build
 		const builtBST = arrayToBST(cleanedArray);
 		// return root node
+		console.log(builtBST);
 		return builtBST;
 	} catch (error) {
 		console.log(error);
@@ -78,5 +79,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 		console.log(error);
 	}
 };
-
-const test = buildTree([1, 4, 6, 8, 2, 6, 8, 243, 6734, 7, 1, 82, 72, 64, 85]);
+const testArray = [1, 4, 6, 8, 2, 26, 58, 243, 6734, 7, 19, 82, 72, 64, 85];
+const test = buildTree(testArray);
+prettyPrint(test);
