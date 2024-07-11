@@ -70,6 +70,8 @@ function Tree(array) {
 			// follow the tree in the same way as for insert()
 			console.log("current node is:");
 			console.log(node);
+			console.log("Current value is:");
+			console.log(value);
 			// start from root
 			// if tree doesnt exist
 			if (node === null) {
@@ -85,11 +87,11 @@ function Tree(array) {
 					console.log("Children on both sides");
 					// find min val on right child
 					// get node to delete
-					let toBeDeleted = node;
+					const toBeDeleted = node;
 					console.log("Original node to be deleted:");
 					console.log(toBeDeleted);
 					// get right child
-					let rightChild = toBeDeleted.right;
+					const rightChild = toBeDeleted.right;
 					console.log("Right child of node to be deleted:");
 					console.log(rightChild);
 					// crawl through right branch > left...
@@ -112,7 +114,7 @@ function Tree(array) {
 					console.log(toBeDeleted);
 					// remove the minimum value from its original position
 					//minValue = null;
-					deleteItem(minValue.data, rightChild);
+					deleteItem(minValue.data, toBeDeleted.right);
 					// stop - success
 					return true;
 				}
@@ -136,18 +138,22 @@ function Tree(array) {
 					// stop - success
 					return true;
 				}
-				// else the node has no children
-				else {
-					console.log("No children");
-					console.log("Node is:");
-					console.log(node);
-					// delete node
-					node = Node();
-					console.log("Node was deleted:");
-					console.log(node);
-					// stop - success
-					return true;
-				}
+			}
+			// else if node ahead is equal to value and has no children
+			else if (
+				node.left.data === value &&
+				node.left.right === null &&
+				node.left.left === null
+			) {
+				console.log("No children");
+				console.log("Node is:");
+				console.log(node);
+				// delete node
+				node.left = null;
+				console.log("Node ahead was deleted:");
+				console.log(node);
+				// stop - success
+				return true;
 			}
 			// if neither is true go a layer deeper according to tree logic
 			else if (node.data > value) {
