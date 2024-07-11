@@ -1,7 +1,7 @@
 // use no built-in methods
 
 // Node factory function
-function createNode(value = null, leftChild = null, rightChild = null) {
+function Node(value = null, leftChild = null, rightChild = null) {
 	return {
 		value,
 		leftChild,
@@ -10,16 +10,16 @@ function createNode(value = null, leftChild = null, rightChild = null) {
 }
 
 // Binary Search Tree factory function
-function createBinarySearchTree() {
-	// array to be made into BST
-	const array = [];
-	// clean array (remove duplicate values)
+function Tree(array) {
+	const root = buildTree(array);
+}
+
+// Build Tree func
+function buildTree(array) {
+	// remove duplicate values
 	function cleanArray() {}
-	// set middle element of array as root
-	function setRoot() {}
-	// sorts array
+	// sort array
 	function sortArray() {}
-	// takes sorted array and returns binary search tree
 	function arrayToBST() {
 		// recursion
 		// set base case: if reached end of input array
@@ -32,3 +32,17 @@ function createBinarySearchTree() {
 		// attach to root element as right child
 	}
 }
+
+// Provided BST print function
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+	if (node === null) {
+		return;
+	}
+	if (node.right !== null) {
+		prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+	}
+	console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+	if (node.left !== null) {
+		prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+	}
+};
