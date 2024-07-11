@@ -205,7 +205,35 @@ function Tree(array) {
 			}
 		}
 		// find and return node with value
-		function find(value) {}
+		function find(value, node = root) {
+			// if node found
+			/*
+			console.log(value);
+			console.log(node.data);
+			*/
+			if (node.data === value) {
+				//console.log("Node found");
+				// return node
+				//console.log(node);
+				return node;
+			}
+			// if node !== value go a layer deeper according to tree logic
+			else if (node.data > value && node.left !== null) {
+				// GREATER - go left to lower values
+				//console.log("Going left...");
+				// go down the branch
+				return find(value, node.left);
+			} else if (node.data < value && node.right !== null) {
+				// LESS - go right to higher values
+				//console.log("Going right...");
+				// go down the branch
+				return find(value, node.right);
+			} else {
+				//console.log("No item found");
+				// no item found
+				return false;
+			}
+		}
 		// traverse tree breadth-first and provide each node as an argument to the callback
 		// use iteration or recursion | return array of vals if no callback param
 		// use array acting as queue to keep track of all child nodes yet to traverse and to add new nodes to list
