@@ -257,7 +257,7 @@ function Tree(array) {
 			const array = inOrder();
 			console.log(array);
 			// build new tree
-			//return buildTree(array);
+			return buildTree(array);
 		}
 		return {
 			root,
