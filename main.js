@@ -68,32 +68,38 @@ function Tree(array) {
 		// delete a value from the tree
 		function deleteItem(value, node = root) {
 			// follow the tree in the same way as for insert()
+			/*
 			console.log("current node is:");
 			console.log(node);
 			console.log("Current value is:");
 			console.log(value);
+			*/
 			// start from root
 			// if tree doesnt exist
 			if (node === null) {
 				// stop - failure (empty tree)
-				console.log("Empty tree");
+				//console.log("Empty tree");
 				return false;
 			}
 			// check if node.data matches value
 			else if (node.data === value) {
-				console.log("Match");
+				//console.log("Match");
 				// if the node has children on both sides
 				if (node.left !== null && node.right !== null) {
-					console.log("Children on both sides");
+					//console.log("Children on both sides");
 					// find min val on right child
 					// get node to delete
 					const toBeDeleted = node;
+					/*
 					console.log("Original node to be deleted:");
 					console.log(toBeDeleted);
+					*/
 					// get right child
 					const rightChild = toBeDeleted.right;
+					/*
 					console.log("Right child of node to be deleted:");
 					console.log(rightChild);
+					*/
 					// crawl through right branch > left...
 					let minValue = rightChild;
 					node = rightChild;
@@ -101,17 +107,23 @@ function Tree(array) {
 					while (node.left !== null) {
 						// set minvalue = left child
 						minValue = node.left;
+						/*
 						console.log("Current min value:");
 						console.log(minValue);
+						*/
 						// go to left child
 						node = node.left;
 					}
+					/*
 					console.log("Min Value was:");
 					console.log(minValue);
+					*/
 					// replace the original node with the minimum value
 					toBeDeleted.data = minValue.data;
+					/*
 					console.log("Deleted Node was Replaced:");
 					console.log(toBeDeleted);
+					*/
 					// remove the minimum value from its original position
 					//minValue = null;
 					deleteItem(minValue.data, toBeDeleted.right);
@@ -120,21 +132,25 @@ function Tree(array) {
 				}
 				// else if the node has children on the left side
 				else if (node.left !== null && node.right === null) {
-					console.log("Children on left side");
+					//console.log("Children on left side");
 					// replace node with node.left
 					node = Node(node.left.data, node.left.left, node.left.right);
+					/*
 					console.log("Node was deleted and replaced with left child:");
 					console.log(node);
+					*/
 					// stop - success
 					return true;
 				}
 				// else if the node has children on the right side
 				else if (node.left === null && node.right !== null) {
-					console.log("Children on right side");
+					//console.log("Children on right side");
 					// replace node with node.right
 					node = Node(node.right.data, node.right.left, node.right.right);
+					/*
 					console.log("Node was deleted and replaced with right child:");
 					console.log(node);
+					*/
 					// stop - success
 					return true;
 				}
@@ -145,13 +161,17 @@ function Tree(array) {
 				node.left.right === null &&
 				node.left.left === null
 			) {
+				/*
 				console.log("No children");
 				console.log("Node is:");
 				console.log(node);
+				*/
 				// delete node
 				node.left = null;
+				/*
 				console.log("Node ahead was deleted:");
 				console.log(node);
+				*/
 				// stop - success
 				return true;
 			}
@@ -160,26 +180,26 @@ function Tree(array) {
 				// GREATER - go left to lower values
 				// if there is a left node
 				if (node.left !== null) {
-					console.log("Going left...");
+					//console.log("Going left...");
 					// go down the branch
 					deleteItem(value, node.left);
 				} else {
 					// else no item found return false
 					// stop - failure (no item found)
-					console.log("No item found");
+					//console.log("No item found");
 					return false;
 				}
 			} else if (node.data < value) {
 				// LESS - go right to higher values
 				// if there is a right node
 				if (node.right !== null) {
-					console.log("Going right...");
+					//console.log("Going right...");
 					// go down the branch
 					deleteItem(value, node.right);
 				} else {
 					// else no item found return false
 					// stop - failure (no item found)
-					console.log("No item found");
+					//console.log("No item found");
 					return false;
 				}
 			}
