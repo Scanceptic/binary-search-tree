@@ -14,7 +14,23 @@ function Node(data, left = null, right = null) {
 // Binary Search Tree factory function
 function Tree(array) {
 	try {
+		// build tree and save root node
 		const root = buildTree(array);
+		// insert a value into the tree
+		function insert(value) {
+			// follow path down the tree based on higher/lower until reaching node.right || node.left === null
+			// insert value
+		}
+		// delete a value from the tree
+		function deleteItem(value) {
+			// find the node
+			// delete node
+			// cleanup tree
+			    // does the node have children?
+			    // do their nodes have children?
+			    // are there only children on the right or left?
+		}
+		return { root };
 	} catch (error) {
 		console.log(error);
 	}
@@ -80,5 +96,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 	}
 };
 const testArray = [1, 4, 6, 8, 2, 26, 58, 243, 6734, 7, 19, 82, 72, 64, 85];
-const test = buildTree(testArray);
-prettyPrint(test);
+const test = Tree(testArray);
+prettyPrint(test.root);
