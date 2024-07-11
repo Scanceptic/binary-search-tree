@@ -78,6 +78,7 @@ function Tree(array) {
 			// if it matches value
 			if (node.left.data === value) {
 				console.log("Match left");
+				console.log(node);
 				// get node.left.left and node.left.right
 				// attach them to node.left
 				// stop - success
@@ -86,22 +87,14 @@ function Tree(array) {
 			// check node.right.data
 			if (node.right.data === value) {
 				console.log("Match right");
+				console.log(node);
 				// get node.right.left and node.right.right
 				// attach them to node.right
 				// stop - success
 				return true;
 			}
 			// if neither is true go a layer deeper according to tree logic
-			// is current node equal to value?
-			if (node.data === value) {
-				// SAME - remove item
-				// remove selected node
-				node.data = null;
-				// patch up tree
-				// connect node.right and node.left to parent node
-				// stop - sucess (removed item)
-				return true;
-			} else if (node.data > value) {
+			if (node.data > value) {
 				// GREATER - go left to lower values
 				// if there is a left node
 				if (node.left !== null) {
