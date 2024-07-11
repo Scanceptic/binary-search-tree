@@ -268,7 +268,13 @@ function Tree(array) {
 			return array;
 		}
 		// traverse tree in depth-first order: in order
-		function inOrder(callback) {}
+		function inOrder(callback = console.log, node = root) {
+			if (node) {
+				inOrder(callback, node.left);
+				callback(node.data);
+				inOrder(callback, node.right);
+			}
+		}
 		// traverse tree in depth-first order: pre order
 		function preOrder(callback) {}
 		// traverse tree in depth-first order: post order
