@@ -70,26 +70,72 @@ function Tree(array) {
 			// follow the tree in the same way as for insert()
 			// start from root
 			// if tree doesnt exist
-			if (node.data === null) {
+			if (node === null) {
 				// stop - failure (empty tree)
 				console.log("Empty tree");
 				return false;
 			}
-			// check if node.left.data and node.right.data match value
-			else if (node.left && node.left.data === value) {
-				console.log("Match left");
-				console.log(node);
-				// get node.left.left and node.left.right
-				// attach them to node.left
-				// stop - success
-				return true;
-			} else if (node.right && node.right.data === value) {
-				console.log("Match right");
-				console.log(node);
-				// get node.right.left and node.right.right
-				// attach them to node.right
-				// stop - success
-				return true;
+			// check if node.data matches value
+			else if (node.data === value) {
+				console.log("Match");
+				// if the node has children on both sides
+				if (node.left !== null && node.right !== null) {
+					console.log("Children on both sides");
+					// find min val on right child
+					// get node to delete
+					let toBeDeleted = node;
+					console.log("Original node to be deleted:");
+					console.log(toBeDeleted);
+					// get right child
+					let rightChild = toBeDeleted.right;
+					console.log("Right child of node to be deleted:");
+					console.log(rightChild);
+					// crawl through right branch > left...
+					let minValue = rightChild;
+					node = rightChild;
+					// while there is a left child
+					while (node.left !== null) {
+						// set minvalue = left child
+						minValue = node.left;
+						console.log("Current min value:");
+						console.log(minValue);
+						// go to left child
+						node = node.left;
+					}
+					// replace the original node with the minimum value
+					toBeDeleted.data = minValue.data;
+					console.log("Deleted Node was Replaced:");
+					console.log(toBeDeleted);
+					// remove the minimum value from its original position
+					//minValue = null;
+					deleteItem(minValue, rightChild);
+					// stop - success
+					return true;
+				}
+				// else if the node has children on the left side
+				else if (node.left !== null && node.right === null) {
+					console.log("Children on left side");
+					// replace node with node.left
+					node = node.left;
+					// stop - success
+					return true;
+				}
+				// else if the node has children on the right side
+				else if (node.left === null && node.right !== null) {
+					console.log("Children on right side");
+					// replace node with node.right
+					node = node.right;
+					// stop - success
+					return true;
+				}
+				// else the node has no children
+				else {
+					console.log("No children");
+					// delete node
+					node = null;
+					// stop - success
+					return true;
+				}
 			}
 			// if neither is true go a layer deeper according to tree logic
 			else if (node.data > value) {
