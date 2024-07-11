@@ -237,7 +237,36 @@ function Tree(array) {
 		// traverse tree breadth-first and provide each node as an argument to the callback
 		// use iteration or recursion | return array of vals if no callback param
 		// use array acting as queue to keep track of all child nodes yet to traverse and to add new nodes to list
-		function levelOrder(callback) {}
+		function levelOrder(callback = console.log, queue = [root], array = []) {
+			while (queue.length > 0) {
+				// set new node
+				const node = queue[0];
+				// execute callback on node in queue
+				callback(node);
+				// push the left child to the queue if not null
+				if (node.left !== null) {
+					//console.log("left node");
+					queue.push(node.left);
+				}
+				// push the right child to the queue if not null
+				if (node.right !== null) {
+					//console.log("right node");
+					queue.push(node.right);
+				}
+				// remove visited node from front of queue
+				/*
+				console.log("queue before shift:");
+				console.log(queue);
+				*/
+				array.push(node.data);
+				queue.shift();
+				/*
+				console.log("queue after shift:");
+				console.log(queue);
+				*/
+			}
+			return array;
+		}
 		// traverse tree in depth-first order: in order
 		function inOrder(callback) {}
 		// traverse tree in depth-first order: pre order
