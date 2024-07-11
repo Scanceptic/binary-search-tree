@@ -217,7 +217,24 @@ function Tree(array) {
 			return Math.max(leftHeight, rightHeight) + 1;
 		}
 		// return a given node's depth (no of branches to root node)
-		function depth(node) {}
+		function depth(inputNode, node = root, count = 0) {
+			count++;
+			// if node found
+			if (node.data === inputNode.data) return count - 1;
+			// if node !== value go a layer deeper according to tree logic
+			else if (node.data > inputNode.data && node.left !== null) {
+				// GREATER - go left to lower values
+				// go down the branch
+				return depth(inputNode, node.left, count);
+			} else if (node.data < inputNode.data && node.right !== null) {
+				// LESS - go right to higher values
+				// go down the branch
+				return depth(inputNode, node.right, count);
+			} else {
+				// no item found
+				return false;
+			}
+		}
 		// check if tree is balanced
 		function isBalanced() {
 			// go through every node
