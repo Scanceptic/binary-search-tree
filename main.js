@@ -276,9 +276,16 @@ function Tree(array) {
 			}
 		}
 		// traverse tree in depth-first order: pre order
-		function preOrder(callback) {}
+		function preOrder(callback = console.log, node = root) {
+			if (node === null) return;
+
+			callback(node.data);
+
+			preOrder(callback, node.left);
+			preOrder(callback, node.right);
+		}
 		// traverse tree in depth-first order: post order
-		function postOrder(callback) {}
+		function postOrder(callback = console.log, node = root) {}
 		// return a given node's height (longest no of branches to leaf node)
 		function height(node) {}
 		// return a given node's depth (no of branches to root node)
