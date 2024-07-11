@@ -251,7 +251,7 @@ function Tree(array) {
 			return isBalanced(node.left) && isBalanced(node.right);
 		}
 		// rebalance an unbalanced tree
-		function rebalance(node = root) {
+		function rebalance() {
 			// use a traversal method to provide a new array to the buildTree func
 			// use inorder traversal
 			const array = inOrder();
