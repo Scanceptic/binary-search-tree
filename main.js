@@ -68,6 +68,8 @@ function Tree(array) {
 		// delete a value from the tree
 		function deleteItem(value, node = root) {
 			// follow the tree in the same way as for insert()
+			console.log("current node is:");
+			console.log(node);
 			// start from root
 			// if tree doesnt exist
 			if (node === null) {
@@ -102,13 +104,15 @@ function Tree(array) {
 						// go to left child
 						node = node.left;
 					}
+					console.log("Min Value was:");
+					console.log(minValue);
 					// replace the original node with the minimum value
 					toBeDeleted.data = minValue.data;
 					console.log("Deleted Node was Replaced:");
 					console.log(toBeDeleted);
 					// remove the minimum value from its original position
 					//minValue = null;
-					deleteItem(minValue, rightChild);
+					deleteItem(minValue.data, rightChild);
 					// stop - success
 					return true;
 				}
@@ -116,7 +120,9 @@ function Tree(array) {
 				else if (node.left !== null && node.right === null) {
 					console.log("Children on left side");
 					// replace node with node.left
-					node = node.left;
+					node = Node(node.left.data, node.left.left, node.left.right);
+					console.log("Node was deleted and replaced with left child:");
+					console.log(node);
 					// stop - success
 					return true;
 				}
@@ -124,15 +130,21 @@ function Tree(array) {
 				else if (node.left === null && node.right !== null) {
 					console.log("Children on right side");
 					// replace node with node.right
-					node = node.right;
+					node = Node(node.right.data, node.right.left, node.right.right);
+					console.log("Node was deleted and replaced with right child:");
+					console.log(node);
 					// stop - success
 					return true;
 				}
 				// else the node has no children
 				else {
 					console.log("No children");
+					console.log("Node is:");
+					console.log(node);
 					// delete node
-					node = null;
+					node = Node();
+					console.log("Node was deleted:");
+					console.log(node);
 					// stop - success
 					return true;
 				}
