@@ -18,8 +18,6 @@ function Tree(array) {
 		const root = buildTree(array);
 		// insert a value into the tree (recursive)
 		function insert(value, node = root) {
-			//console.log("Node is:");
-			//console.log(node);
 			// is the tree empty?
 			if (node.data === null) {
 				//console.log("Tree empty");
@@ -30,76 +28,44 @@ function Tree(array) {
 				// YES - go left to lower values
 				// if there is a left node
 				if (node.left !== null) {
-					//console.log("Going left...");
 					// go down the branch
 					insert(value, node.left);
 				} else {
-					//console.log("Inserting left");
 					// else insert value
 					node.left = Node(value);
-					// stop - sucess
 					return true;
 				}
 			} else if (node.data < value) {
 				// NO - go right to higher values
 				// if there is a right node
 				if (node.right !== null) {
-					//console.log("Going right...");
 					// go down the branch
 					insert(value, node.right);
 				} else {
-					//console.log("Inserting right");
 					// else insert value
 					node.right = Node(value);
-					// stop - sucess
 					return true;
 				}
 			} else {
-				/*
-				 *   else node === value so stop because either:
-				 *   it was an empty tree and node has been placed at root
-				 *   or a duplicate snuck in somewhere so should not be placed in the tree
-				 */
-				//console.log("Null node");
-				// stop - failure (empty tree or duplicate)
 				return false;
 			}
 		}
 		// delete a value from the tree
 		function deleteItem(value, node = root) {
 			// follow the tree in the same way as for insert()
-			/*
-			console.log("current node is:");
-			console.log(node);
-			console.log("Current value is:");
-			console.log(value);
-			*/
 			// start from root
 			// if tree doesnt exist
 			if (node === null) {
-				// stop - failure (empty tree)
-				//console.log("Empty tree");
 				return false;
 			}
 			// check if node.data matches value
 			else if (node.data === value) {
-				//console.log("Match");
 				// if the node has children on both sides
 				if (node.left !== null && node.right !== null) {
-					//console.log("Children on both sides");
-					// find min val on right child
 					// get node to delete
 					const toBeDeleted = node;
-					/*
-					console.log("Original node to be deleted:");
-					console.log(toBeDeleted);
-					*/
 					// get right child
 					const rightChild = toBeDeleted.right;
-					/*
-					console.log("Right child of node to be deleted:");
-					console.log(rightChild);
-					*/
 					// crawl through right branch > left...
 					let minValue = rightChild;
 					node = rightChild;
@@ -107,51 +73,25 @@ function Tree(array) {
 					while (node.left !== null) {
 						// set minvalue = left child
 						minValue = node.left;
-						/*
-						console.log("Current min value:");
-						console.log(minValue);
-						*/
 						// go to left child
 						node = node.left;
 					}
-					/*
-					console.log("Min Value was:");
-					console.log(minValue);
-					*/
 					// replace the original node with the minimum value
 					toBeDeleted.data = minValue.data;
-					/*
-					console.log("Deleted Node was Replaced:");
-					console.log(toBeDeleted);
-					*/
 					// remove the minimum value from its original position
-					//minValue = null;
 					deleteItem(minValue.data, toBeDeleted.right);
-					// stop - success
 					return true;
 				}
 				// else if the node has children on the left side
 				else if (node.left !== null && node.right === null) {
-					//console.log("Children on left side");
 					// replace node with node.left
 					node = Node(node.left.data, node.left.left, node.left.right);
-					/*
-					console.log("Node was deleted and replaced with left child:");
-					console.log(node);
-					*/
-					// stop - success
 					return true;
 				}
 				// else if the node has children on the right side
 				else if (node.left === null && node.right !== null) {
-					//console.log("Children on right side");
 					// replace node with node.right
 					node = Node(node.right.data, node.right.left, node.right.right);
-					/*
-					console.log("Node was deleted and replaced with right child:");
-					console.log(node);
-					*/
-					// stop - success
 					return true;
 				}
 			}
@@ -161,17 +101,8 @@ function Tree(array) {
 				node.left.right === null &&
 				node.left.left === null
 			) {
-				/*
-				console.log("No children");
-				console.log("Node is:");
-				console.log(node);
-				*/
 				// delete node
 				node.left = null;
-				/*
-				console.log("Node ahead was deleted:");
-				console.log(node);
-				*/
 				// stop - success
 				return true;
 			}
@@ -180,26 +111,19 @@ function Tree(array) {
 				// GREATER - go left to lower values
 				// if there is a left node
 				if (node.left !== null) {
-					//console.log("Going left...");
 					// go down the branch
 					deleteItem(value, node.left);
 				} else {
 					// else no item found return false
-					// stop - failure (no item found)
-					//console.log("No item found");
 					return false;
 				}
 			} else if (node.data < value) {
 				// LESS - go right to higher values
-				// if there is a right node
 				if (node.right !== null) {
-					//console.log("Going right...");
 					// go down the branch
 					deleteItem(value, node.right);
 				} else {
 					// else no item found return false
-					// stop - failure (no item found)
-					//console.log("No item found");
 					return false;
 				}
 			}
@@ -207,29 +131,19 @@ function Tree(array) {
 		// find and return node with value
 		function find(value, node = root) {
 			// if node found
-			/*
-			console.log(value);
-			console.log(node.data);
-			*/
 			if (node.data === value) {
-				//console.log("Node found");
-				// return node
-				//console.log(node);
 				return node;
 			}
 			// if node !== value go a layer deeper according to tree logic
 			else if (node.data > value && node.left !== null) {
 				// GREATER - go left to lower values
-				//console.log("Going left...");
 				// go down the branch
 				return find(value, node.left);
 			} else if (node.data < value && node.right !== null) {
 				// LESS - go right to higher values
-				//console.log("Going right...");
 				// go down the branch
 				return find(value, node.right);
 			} else {
-				//console.log("No item found");
 				// no item found
 				return false;
 			}
@@ -294,7 +208,20 @@ function Tree(array) {
 			callback(node.data);
 		}
 		// return a given node's height (longest no of branches to leaf node)
-		function height(node) {}
+		function height(node, heightCount = 0) {
+			console.log(heightCount);
+			console.log(node);
+			if (node.left !== null || node.right !== null) {
+				heightCount++;
+				if (node.left !== null) {
+					return height(node.left, heightCount);
+				} else if (node.right !== null) {
+					return height(node.right, heightCount);
+				}
+			} else {
+				return heightCount;
+			}
+		}
 		// return a given node's depth (no of branches to root node)
 		function depth(node) {}
 		// check if tree is balanced
