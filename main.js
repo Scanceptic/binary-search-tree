@@ -1,8 +1,8 @@
 // Node factory function
-function Node(value = null, left = null, right = null) {
+function Node(data, left = null, right = null) {
 	try {
 		return {
-			value,
+			data,
 			left,
 			right,
 		};
